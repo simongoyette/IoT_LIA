@@ -1,0 +1,9 @@
+Which applications will handle which tasks:
+The ESP32 will receive data from the temperature sensor and publish it to the raspberry pi.
+The raspberry pi will subscribe to the ESP32 data, compare it to the ideal value, and send commands to the ESP32 to try and keep the temperature around the ideal value. 
+From there, the ESP32 will use the commands sent by the raspberry pi to control the devices to keep the temperature around the ideal value.
+
+Which conditions will lead to which results:
+If the temperature is < 25, the green LED turns on, while fan, yellow LED, red LED, and buzzer are off.
+If the temperature is >= 25 and <30, the fan and yellow LED turn on, while green LED, red LED and buzzer are off
+If the temperature is >= 30, the fan, buzzer, and red LED turn on, while yellow and green LED are off
