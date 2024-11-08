@@ -1,0 +1,54 @@
+System operation:
+
+
+ESP32:
+
+Setup:
+On the breadboard:
+DHT11 temperature sensor
+Green LED
+Yellow LED
+Red LED
+Fan
+Buzzer
+
+The DHT11 will be measuring the real-time temperature of the "machine"
+It will be using mosquitto_pub to send a message to the IoT_Controller.py containing the value measured by the DHT11
+
+
+JSON rules:
+
+Rule 1:
+IF the temperature is below 25 degrees celsius
+THEN 
+    It will print out "Right temperature, turn on green LED."
+    Publish the message "Cool" to the topic machine/status.
+Rule 2:
+IF the temperature is between 25 degrees celsius and 30 degrees celsius
+THEN
+    It will print out "It's starting to get warm, turn on the fan and yellow LED."
+    Publish the message "warm" to the topic machine/status. 
+Rule 3:
+IF the temperature is over 30 degrees celsius
+THEN
+    It will print out "It's too hot, turn on the buzzer and red LED."
+    Publish the message "overheat" to the topic machine/status.
+
+
+
+IoT_Controller.py:
+
+Reads our JSON set of rules.
+Connects to the MQTT message broker (ESP32).
+Subscribes to all the topics on the broker.
+Process incoming messages and compare the received data with the conditions defined in the rules. The data received will be the recorded temperature by the DHT11
+It will compare the value from the ESP32 to the value we want.
+According to the value from the ESP32, it will send a message back to the ESP32:
+
+
+
+ESP32:
+According to the message received, it will perform actions such as:
+IF value < 25 --> GREEN LED
+IF 25 > value < 30 --> YELLOW LED AND FAN
+IF value > 30 --> RED LED AND BUZZER AND FAN
