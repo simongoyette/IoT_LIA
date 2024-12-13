@@ -1,1 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Historian Data Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .plot-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        #last-update {
+            text-align: center;
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Historian Data Visualization</h1>
+        <div class="plot-container">
+            <img src="data:image/png;base64,{{ image }}" alt="Historian Data Plot">
+        </div>
+        <div id="last-update">Last updated: <span id="update-time"></span></div>
+    </div>
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('update-time').textContent = now.toLocaleString();
+        }
 
+        function refreshPage() {
+            window.location.reload();
+            updateDateTime();
+        }
+
+        // Update time immediately
+        updateDateTime();
+        
+        // Refresh every 60 seconds
+        setInterval(refreshPage, 60000);
+    </script>
+</body>
+</html>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date(); //make a new date
+            document.getElementById('update-time').textContent = now.toLocaleString(); //place the new date text in the update-time span above
+        }
+
+        function refreshPage() {
+            window.location.reload();//force refresh of the page when called
+            updateDateTime();//call the function above to display the new time
+        }
+
+        // Update time immediately
+        updateDateTime(); //upon loading the page, update the time to show it
+        
+        // Refresh every 60 seconds
+        setInterval(refreshPage, 60000); //60 seconds from now, call the refreshPage function
+    </script>
