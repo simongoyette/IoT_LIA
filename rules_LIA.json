@@ -1,1 +1,21 @@
+[
+{
+    "conditions":[
+        {"topic":"machine/temp", "comparison":"<", "value":23}
+    ],
+    "action":{"message":"Right temperature, turn on green LED", "topic":"machine/status","value":"Cool"}
+},
+{
+    "conditions":[
+        {"topic":"machine/temp", "comparison":">=", "value":23},
+        {"topic":"machine/temp", "comparison":"<=", "value":24}
+    ],
+    "action":{"message":"It's starting to get warm, turn on the fan and yellow LED", "topic":"machine/status","value":"Warm"}
+},
+{
+    "conditions":[
+        {"topic":"machine/temp", "comparison":">=", "value":25}
+    ],
+    "action":{"message":"It's too hot, turn on the buzzer and red LED", "topic":"machine/status", "value":"Overheat"}
+}
 
